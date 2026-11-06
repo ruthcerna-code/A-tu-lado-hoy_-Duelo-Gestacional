@@ -1,0 +1,6 @@
+{
+  "name": "A Tu Lado Hoy",
+  "description": "Plataforma gratuita de acompañamiento emocional durante el embarazo, posparto y pérdida gestacional o neonatal en Perú. Aquí también se trata de ti.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

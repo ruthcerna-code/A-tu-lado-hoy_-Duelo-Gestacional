@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --sands-navy: #002E67;
+    --sands-navy-dark: #001E44;
+    --sands-teal: #1A95BA;
+    --sands-orange: #EF8E11;
+    --sands-orange-hover: #D87B00;
+    --sands-bg-light: #F8FAFC;
+    --sands-text-main: #0B254A;
+    --sands-text-muted: #475569;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--sands-bg-light);
+    color: var(--sands-text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .font-serif-soft {
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+  }
+
+  .font-script {
+    font-family: 'Caveat', cursive;
+  }
+}
+
+/* Sands UK Crisp Card Styles */
+.sands-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 46, 103, 0.12);
+  box-shadow: 0 4px 20px -4px rgba(0, 46, 103, 0.06);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sands-card:hover {
+  border-color: #1A95BA;
+  box-shadow: 0 10px 28px -6px rgba(0, 46, 103, 0.12);
+  transform: translateY(-2px);
+}
+
+.sands-card-navy {
+  background-color: #002E67;
+  color: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(26, 149, 186, 0.25);
+}
+
+/* Sands Breathing Rhythm Animation */
+@keyframes sandsBreath {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.98;
+  }
+}
+
+.animate-sands-breath {
+  animation: sandsBreath 8s ease-in-out infinite;
+}
