@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Tu Lado Hoy · Acompañamiento emocional perinatal en Perú</title>
+  <meta name="description" content="Plataforma gratuita y confidencial de acompañamiento emocional en Perú durante el embarazo, posparto y pérdida gestacional o neonatal. Aquí también se trata de ti.">
+  
+  <!-- Tipografía Oficial Sands UK: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN para renderizado inmediato -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sands: {
+              navy: '#002E67',
+              navydark: '#001E44',
+              teal: '#1A95BA',
+              orange: '#EF8E11',
+              orangeHover: '#D87B00',
+              bgLight: '#F8FAFC',
+              textMain: '#0B254A',
+              textMuted: '#475569',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['"Fraunces"', 'Georgia', 'serif'],
+            script: ['"Caveat"', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --sands-navy: #002E67;
+      --sands-teal: #1A95BA;
+      --sands-orange: #EF8E11;
+      --sands-bg: #F8FAFC;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--sands-bg);
+      color: #0B254A;
+      line-height: 1.65;
+    }
+    .sands-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 46, 103, 0.12);
+      border-radius: 16px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sands-card:hover {
+      border-color: #1A95BA;
+      box-shadow: 0 10px 28px -6px rgba(0, 46, 103, 0.12);
+      transform: translateY(-2px);
+    }
+    @keyframes sandsBreath {
+      0%, 100% { transform: scale(0.9); opacity: 0.75; }
+      50% { transform: scale(1.12); opacity: 0.98; }
+    }
+    .animate-sands-breath {
+      animation: sandsBreath 8s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-[#002E67] antialiased selection:bg-[#EF8E11] selection:text-white">
+
+  <!-- 1. BARRA SUPERIOR DE UTILIDAD · LÍNEAS DE APOYO PERÚ Y SALIDA RÁPIDA (Firma Sands UK) -->
+  <aside aria-label="Líneas de ayuda urgente y salida rápida" class="bg-[#002E67] text-white py-2 px-4 sm:px-8 text-xs font-medium">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 overflow-hidden truncate">
+        <span class="w-2 h-2 rounded-full bg-[#EF8E11] shrink-0"></span>
+        <span class="text-white/90">Líneas gratuitas de apoyo en Perú:</span>
+        <span class="font-bold text-[#1A95BA] whitespace-nowrap">113 (Opción 5 - Salud Mental)</span>
+        <span class="text-white/40 hidden md:inline">|</span>
+        <span class="font-bold text-[#1A95BA] whitespace-nowrap hidden md:inline">Línea 100 (MIMP)</span>
+        <button type="button" onclick="openModal('modal-recursos')" class="underline text-white/90 hover:text-[#EF8E11] ml-1 transition-colors cursor-pointer hidden lg:inline">
+          Ver directorio completo
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <button type="button" onclick="openModal('modal-recursos')" class="px-2.5 py-1 rounded bg-[#1A95BA]/30 hover:bg-[#1A95BA]/50 text-white text-[11px] font-semibold transition-colors cursor-pointer">
+          Directorio Perú
+        </button>
+        <!-- Botón de Salida Rápida de Sands para protección en pantalla -->
+        <button type="button" onclick="quickExit()" title="Salir inmediatamente a Google por discreción" class="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#EF8E11] hover:bg-[#D87B00] text-[#001E44] font-bold text-[11px] transition-colors cursor-pointer">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          <span>Salida rápida</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. HEADER Y NAVEGACIÓN PRINCIPAL (Emblema Sands UK: Lágrima + Sol de Esperanza) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-xs border-b border-[#002E67]/10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-6">
+      
+      <!-- Logotipo e isotipo dual Sands -->
+      <a href="#inicio" class="flex items-center gap-3 whitespace-nowrap shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-[#002E67] flex items-center justify-center text-white shadow-xs group-hover:bg-[#001E44] transition-colors">
+          <svg viewBox="0 0 32 32" class="w-6 h-6" fill="none">
+            <path d="M16 4C16 4 9 13.5 9 18.5C9 22.64 12.13 26 16 26C19.87 26 23 22.64 23 18.5C23 13.5 16 4 16 4Z" fill="#1A95BA" opacity="0.85"/>
+            <circle cx="16" cy="18.5" r="4.5" fill="#EF8E11"/>
+            <path d="M16 11V13M16 24V26M10.5 18.5H12.5M19.5 18.5H21.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="font-extrabold text-[20px] sm:text-[22px] tracking-tight text-[#002E67] leading-tight">
+            A Tu Lado Hoy
+          </span>
+          <span class="text-[11px] font-bold text-[#1A95BA] tracking-wider uppercase -mt-0.5">
+            Acompañamiento Perinatal · Perú
+          </span>
+        </div>
+      </a>
+
+      <!-- Enlaces de navegación -->
+      <nav class="hidden md:flex items-center gap-6 text-[15px] font-semibold text-[#002E67]/85">
+        <a href="#inicio" class="hover:text-[#1A95BA] transition-colors py-1">Inicio</a>
+        <a href="#etapas" class="hover:text-[#1A95BA] transition-colors py-1">Por etapa</a>
+        <a href="#herramientas" class="hover:text-[#1A95BA] transition-colors py-1">Herramientas</a>
+        <a href="#biblioteca" class="hover:text-[#1A95BA] transition-colors py-1">Biblioteca</a>
+        <a href="#derechos" class="hover:text-[#1A95BA] transition-colors py-1">Ley N.º 32132</a>
+        <a href="#privacidad" class="hover:text-[#1A95BA] transition-colors py-1">Privacidad</a>
+      </nav>
+
+      <!-- Acción principal Sands -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button type="button" onclick="openModal('modal-ingreso')" class="px-5 sm:px-6 py-2.5 text-[15px] font-bold text-[#001E44] bg-[#EF8E11] hover:bg-[#D87B00] active:scale-[0.98] rounded-xl shadow-xs transition-all whitespace-nowrap cursor-pointer">
+          Buscar apoyo
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 3. HERO PRINCIPAL (Azul Marino Sands #002E67 · Tipografía de Alto Impacto · Fotografía Sensible) -->
+  <section id="inicio" class="bg-[#002E67] text-white pt-10 pb-16 lg:py-20 overflow-hidden relative">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Columna de texto -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#1A95BA]/25 border border-[#1A95BA]/40 text-[#1A95BA] text-xs sm:text-sm font-bold tracking-wide uppercase mb-6">
+            <span class="w-2 h-2 rounded-full bg-[#EF8E11]"></span>
+            <span>Acompañamiento emocional perinatal · Perú</span>
+          </div>
+
+          <h1 class="text-[34px] sm:text-[44px] md:text-[52px] font-extrabold leading-[1.15] tracking-tight text-white max-w-xl">
+            Siempre a tu lado.<br>
+            <span class="text-[#1A95BA]">Aquí también se trata de ti.</span>
+          </h1>
+
+          <p class="mt-6 text-[17px] sm:text-[18px] text-white/90 leading-relaxed max-w-xl">
+            Plataforma gratuita y confidencial de apoyo emocional durante el embarazo, el posparto y la pérdida gestacional o neonatal en Perú. Porque mientras los cuidados suelen volcarse exclusivamente en el bebé, tu cuerpo, tus dudas, tu duelo y tu sentir merecen ser sostenidos.
+          </p>
+
+          <!-- Botones de acción Sands -->
+          <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 w-full sm:w-auto">
+            <button type="button" onclick="openModal('modal-ingreso')" class="px-8 py-4 text-[16px] font-bold text-[#001E44] bg-[#EF8E11] hover:bg-[#D87B00] active:scale-[0.98] rounded-xl shadow-md transition-all text-center whitespace-nowrap cursor-pointer">
+              Entrar sin crear cuenta
+            </button>
+            <a href="#biblioteca" class="inline-flex items-center justify-center gap-2.5 px-6 py-4 text-[16px] font-bold text-white bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl transition-all whitespace-nowrap">
+              <span>Explorar la biblioteca</span>
+              <svg class="w-4 h-4 text-[#1A95BA]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+
+          <!-- Indicadores de confianza Sands -->
+          <div class="mt-10 pt-6 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+            <div class="flex items-center gap-2 text-xs font-semibold text-white/80">
+              <span class="w-2 h-2 rounded-full bg-[#1A95BA]"></span>
+              <span>100% Gratuito en Perú</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-semibold text-white/80">
+              <span class="w-2 h-2 rounded-full bg-[#1A95BA]"></span>
+              <span>Sin usar tu nombre real</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-semibold text-white/80">
+              <span class="w-2 h-2 rounded-full bg-[#1A95BA]"></span>
+              <span>Cifrado declarado</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna de imagen fotográfica sensible -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-[420px] p-2.5 bg-white/10 rounded-2xl border border-white/20 shadow-2xl backdrop-blur-xs">
+            <div class="overflow-hidden rounded-xl aspect-[4/3] sm:aspect-[3/4] bg-[#001E44]">
+              <img src="/src/assets/images/sands_hero_support_1793937713904.jpg" alt="Mujer en momento de calma junto a la ventana con una taza tibia" class="w-full h-full object-cover object-center" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&w=800&q=80';">
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-white text-[#002E67] p-3.5 rounded-xl border border-[#002E67]/15 shadow-xl flex items-center gap-3">
+              <div class="w-9 h-9 rounded-lg bg-[#EF8E11]/20 flex items-center justify-center text-[#EF8E11] shrink-0 font-bold">
+                ♥
+              </div>
+              <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider block text-[#002E67]">Espacio Seguro</span>
+                <span class="text-[11px] font-semibold text-[#475569]">Sin juicios ni expectativas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ACOMPAÑAMIENTO POR ETAPA (Triaje Sands UK: Embarazo · Posparto · Pérdida) -->
+  <section id="etapas" class="py-12 md:py-20 bg-[#F8FAFC]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="max-w-2xl mb-12 text-left">
+        <span class="text-xs sm:text-sm font-bold tracking-wider text-[#1A95BA] uppercase mb-2 block">
+          Acompañamiento cercano
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002E67] tracking-tight">
+          Para ti, en el momento que estés viviendo
+        </h2>
+        <p class="mt-3 text-[16px] sm:text-[17px] text-[#475569] leading-relaxed">
+          Cada vivencia perinatal es personal e irrepetible. No hay una forma correcta ni una emoción obligatoria: el cansancio, la alegría contenida o el duelo tienen cabida en este refugio, sin presiones ni plazos impuestos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Tarjeta de manos en apoyo solidario -->
+        <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl overflow-hidden bg-white border border-[#002E67]/10 shadow-xs p-6">
+          <div class="rounded-xl overflow-hidden aspect-[4/3] bg-[#002E67]/5 mb-5">
+            <img src="/src/assets/images/sands_community_care_1793937712849.jpg" alt="Manos sosteniéndose en señal de apoyo empático" class="w-full h-full object-cover object-center" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=800&q=80';">
+          </div>
+          <div>
+            <span class="text-xs font-bold text-[#1A95BA] uppercase tracking-wider block mb-1">Apoyo compasivo</span>
+            <h3 class="text-xl font-bold text-[#002E67] leading-snug">Nadie debería atravesar este camino en soledad</h3>
+            <p class="mt-2 text-sm text-[#475569] leading-relaxed">
+              Tanto si buscas un desahogo íntimo en tu diario personal como si necesitas comunicarte con el equipo de acompañamiento, este espacio respeta tu propio compás.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Rutas de acompañamiento Sands -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-4">
+          
+          <div class="sands-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-l-4 border-l-[#1A95BA]">
+            <div>
+              <span class="text-xs font-bold text-[#1A95BA] uppercase tracking-wider block">Etapa 01</span>
+              <h3 class="text-lg font-bold text-[#002E67] mt-0.5">Embarazo</h3>
+              <p class="text-sm text-[#475569] mt-1 leading-relaxed">
+                Dudas corporales, temores al parto, ambivalencia y la necesidad de pausar sin exigencias de alegría obligatoria.
+              </p>
+            </div>
+          </div>
+
+          <div class="sands-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-l-4 border-l-[#EF8E11]">
+            <div>
+              <span class="text-xs font-bold text-[#EF8E11] uppercase tracking-wider block">Etapa 02</span>
+              <h3 class="text-lg font-bold text-[#002E67] mt-0.5">Posparto y puerperio</h3>
+              <p class="text-sm text-[#475569] mt-1 leading-relaxed">
+                Agotamiento extremo, soledad invisible, cambios hormonales y el derecho a expresar que la crianza puede sobrepasarte.
+              </p>
+            </div>
+          </div>
+
+          <div class="sands-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-l-4 border-l-[#002E67]">
+            <div>
+              <span class="text-xs font-bold text-[#002E67] uppercase tracking-wider block">Etapa 03</span>
+              <h3 class="text-lg font-bold text-[#002E67] mt-0.5">Pérdida gestacional o neonatal</h3>
+              <p class="text-sm text-[#475569] mt-1 leading-relaxed">
+                Honrar la memoria, nombrar la ausencia y validar el dolor de una partida temprana en cualquier semana de gestación o tras el nacimiento.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. HERRAMIENTAS (Grilla de 4x2 · Tarjetas de Servicios Sands UK) -->
+  <section id="herramientas" class="py-12 md:py-20 bg-white border-y border-[#002E67]/10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="max-w-3xl mb-12 text-left">
+        <span class="text-xs sm:text-sm font-bold tracking-wider text-[#1A95BA] uppercase mb-2 block">
+          Herramientas de apoyo práctico
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002E67] tracking-tight">
+          Funcionalidades creadas para sostenerte
+        </h2>
+        <p class="mt-3 text-[16px] sm:text-[17px] text-[#475569] leading-relaxed">
+          Herramientas sencillas y comprensibles que respetan tus tiempos. Puedes utilizarlas libremente sin crear cuenta.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- 1. Diario personal (Candado · Solo tuyo) -->
+        <div class="sands-card p-6 flex flex-col justify-between border-2 border-[#002E67]">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#002E67] text-white flex items-center justify-center font-bold">🔒</div>
+              <span class="text-[11px] font-bold text-[#002E67] bg-[#E2E8F0] px-2 py-0.5 rounded uppercase">Solo tuyo</span>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Diario personal</h3>
+            <p class="mt-2 text-sm text-[#475569]">Un espacio íntimo para escribir y soltar lo que sientes en tu propio ritmo.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <p class="text-xs font-semibold text-[#002E67]">Solo para ti: tus notas son privadas y nadie más tiene acceso a ellas.</p>
+          </div>
+        </div>
+
+        <!-- 2. Registro de ánimo -->
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#1A95BA]/15 text-[#1A95BA] flex items-center justify-center font-bold">📅</div>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Registro y calendario</h3>
+            <p class="mt-2 text-sm text-[#475569]">Observa tus cambios a lo largo del tiempo sin exigirte estar bien.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <span class="text-xs font-bold text-[#1A95BA]">Observación emocional</span>
+          </div>
+        </div>
+
+        <!-- 3. Respiraciones guiadas -->
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#1A95BA]/15 text-[#1A95BA] flex items-center justify-center font-bold">🌬️</div>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Respiraciones guiadas</h3>
+            <p class="mt-2 text-sm text-[#475569]">Secuencias conscientes para relajar el cuerpo y pausar en momentos de sobrecarga.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <a href="#pausa" class="text-xs font-bold text-[#1A95BA] hover:underline">Tomar una pausa →</a>
+          </div>
+        </div>
+
+        <!-- 4. Cuestionario EPDS (Nota obligatoria de orientación) -->
+        <div class="sands-card p-6 flex flex-col justify-between border-2 border-[#1A95BA]">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#1A95BA] text-white flex items-center justify-center font-bold">📋</div>
+              <span class="text-[11px] font-bold text-[#0E627B] bg-[#E1F2F6] px-2 py-0.5 rounded uppercase">Orientación</span>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Cuestionario EPDS</h3>
+            <p class="mt-2 text-sm text-[#475569]">Escala de Edimburgo para reflexionar sobre tu bienestar anímico en esta etapa.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#1A95BA]/20">
+            <p class="text-xs font-bold text-[#0E627B] bg-[#E1F2F6] p-1.5 rounded">Una orientación, no un diagnóstico.</p>
+          </div>
+        </div>
+
+        <!-- 5. Hilo de apoyo (Diferenciado del diario) -->
+        <div class="sands-card p-6 flex flex-col justify-between border-2 border-[#EF8E11]">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#EF8E11] text-[#001E44] flex items-center justify-center font-bold">💬</div>
+              <span class="text-[11px] font-bold text-[#9E5700] bg-[#FEF3E2] px-2 py-0.5 rounded uppercase">Equipo</span>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Hilo de apoyo</h3>
+            <p class="mt-2 text-sm text-[#475569]">Canal para comunicarte directamente con el equipo cuando necesites ser escuchada.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#EF8E11]/20">
+            <p class="text-xs font-semibold text-[#9E5700]">Para escribirle al equipo: a diferencia del diario, este canal es leído por acompañantes.</p>
+          </div>
+        </div>
+
+        <!-- 6. Recursos de ayuda y contacto -->
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#002E67]/10 text-[#002E67] flex items-center justify-center font-bold">📞</div>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Recursos y contacto</h3>
+            <p class="mt-2 text-sm text-[#475569]">Directorio de contención inmediata en Perú y comunicación rápida con tu contacto de confianza.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <button onclick="openModal('modal-recursos')" class="text-xs font-bold text-[#002E67] hover:underline">Ver líneas Perú →</button>
+          </div>
+        </div>
+
+        <!-- 7. Biblioteca perinatal -->
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#1A95BA]/15 text-[#1A95BA] flex items-center justify-center font-bold">📖</div>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Biblioteca perinatal</h3>
+            <p class="mt-2 text-sm text-[#475569]">Lecturas cuidadas sobre bienestar emocional y duelo gestacional o perinatal.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <a href="#biblioteca" class="text-xs font-bold text-[#1A95BA] hover:underline">Ver lecturas →</a>
+          </div>
+        </div>
+
+        <!-- 8. Derechos en Perú -->
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-[#002E67]/10 text-[#002E67] flex items-center justify-center font-bold">⚖️</div>
+            </div>
+            <h3 class="text-lg font-bold text-[#002E67]">Derechos en Perú</h3>
+            <p class="mt-2 text-sm text-[#475569]">Información sobre el marco de protección y la sección informativa sobre la Ley N.º 32132.</p>
+          </div>
+          <div class="mt-5 pt-3 border-t border-[#002E67]/10">
+            <a href="#derechos" class="text-xs font-bold text-[#002E67] hover:underline">Ver sección ley →</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. BIBLIOTECA + TUS DERECHOS EN PERÚ (Dos Columnas · Sands Knowledge Hub) -->
+  <section id="biblioteca" class="py-12 md:py-20 bg-[#F8FAFC]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Columna Izquierda: Biblioteca con 3 Temas -->
+        <div class="lg:col-span-7 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white border border-[#002E67]/15 shadow-xs">
+          <div>
+            <span class="text-xs sm:text-sm font-bold tracking-wider text-[#1A95BA] uppercase mb-2 block">
+              Centro de información y lectura
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#002E67] tracking-tight">
+              Biblioteca perinatal de apoyo
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-[#475569] leading-relaxed">
+              Artículos y lecturas cuidadas sobre salud emocional y duelo, elaborados para brindar consuelo, información y respeto.
+            </p>
+
+            <div class="mt-6 space-y-3">
+              <div class="p-4 rounded-xl bg-[#F8FAFC] border border-[#002E67]/10 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-base text-[#002E67]">Bienestar emocional</h3>
+                  <p class="text-xs sm:text-sm text-[#475569]">Validar el cansancio, límites familiares y el derecho a pausar.</p>
+                </div>
+                <span class="text-xs font-bold text-[#1A95BA]">Lectura</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-[#F8FAFC] border border-[#002E67]/10 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-base text-[#002E67]">Duelo gestacional y perinatal</h3>
+                  <p class="text-xs sm:text-sm text-[#475569]">Nombrar la pérdida, el valor de la memoria y la soledad del duelo.</p>
+                </div>
+                <span class="text-xs font-bold text-[#1A95BA]">Lectura</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-[#F8FAFC] border border-[#002E67]/10 flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-base text-[#002E67]">Posparto y adaptación</h3>
+                  <p class="text-xs sm:text-sm text-[#475569]">Transformación de la identidad, noches en vela y recuperación.</p>
+                </div>
+                <span class="text-xs font-bold text-[#1A95BA]">Lectura</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-[#002E67]/10">
+            <button onclick="openModal('modal-ingreso')" class="px-6 py-3 rounded-xl bg-[#002E67] hover:bg-[#001E44] text-white font-bold text-sm transition-colors cursor-pointer">
+              Explorar la biblioteca
+            </button>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta destacada en Azul Marino Sands · Ley N.º 32132 -->
+        <div id="derechos" class="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#002E67] text-white border border-[#1A95BA]/30 shadow-md">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-md bg-[#1A95BA]/30 text-[#1A95BA] text-xs font-bold tracking-wider uppercase mb-4 border border-[#1A95BA]/30">
+              Marco legal peruano
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Tus derechos en Perú
+            </h2>
+            <p class="mt-4 text-sm sm:text-base text-white/90 leading-relaxed">
+              El acompañamiento integral incluye conocer el marco de respaldo en el país. Contamos con una sección dedicada a brindar información sobre la promulgación de la <strong class="font-bold text-[#1A95BA]">Ley N.º 32132</strong> en el territorio peruano.
+            </p>
+
+            <div class="mt-6 p-4 rounded-xl bg-white/10 border border-white/15">
+              <p class="text-xs text-white/85 leading-relaxed">
+                Accede al espacio informativo sobre la Ley N.º 32132, con referencias a su publicación oficial en las normas legales del Diario Oficial <em>El Peruano</em>.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4">
+            <button onclick="openModal('modal-ley')" class="px-6 py-3.5 rounded-xl bg-[#EF8E11] hover:bg-[#D87B00] text-[#001E44] font-bold text-sm transition-colors cursor-pointer">
+              Conocer la ley
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. PRIVACIDAD Y CONTROL (4 Tarjetas Sands UK · Honestidad sin promesas falsas) -->
+  <section id="privacidad" class="py-12 md:py-20 bg-white border-t border-[#002E67]/10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="max-w-3xl mb-12 text-left">
+        <span class="text-xs sm:text-sm font-bold tracking-wider text-[#1A95BA] uppercase mb-2 block">
+          Privacidad, control y transparencia
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002E67] tracking-tight">
+          Tú decides qué compartes y hasta dónde llegar
+        </h2>
+        <p class="mt-3 text-[16px] sm:text-[17px] text-[#475569] leading-relaxed">
+          Sin barreras de registro obligatorio ni requisitos de revelar tu identidad.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-[#002E67]">Entrar sin cuenta</h3>
+            <p class="mt-2 text-sm text-[#475569]">Acceso directo sin correos obligatorios. Existe la opción de crear cuenta para conservar tus notas en varios dispositivos.</p>
+          </div>
+          <span class="mt-4 pt-3 border-t border-[#002E67]/10 text-xs font-bold text-[#1A95BA]">Acceso inmediato</span>
+        </div>
+
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-[#002E67]">Sin usar tu nombre real</h3>
+            <p class="mt-2 text-sm text-[#475569]">No solicitamos documento ni apellidos. Puedes elegir un seudónimo protector o navegar en completo anonimato.</p>
+          </div>
+          <span class="mt-4 pt-3 border-t border-[#002E67]/10 text-xs font-bold text-[#1A95BA]">Identidad protegida</span>
+        </div>
+
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-[#002E67]">Cifrado declarado</h3>
+            <p class="mt-2 text-sm text-[#475569]">Tus datos son tratados bajo protocolos de cifrado declarados e implementados en la plataforma.</p>
+          </div>
+          <span class="mt-4 pt-3 border-t border-[#002E67]/10 text-xs font-bold text-[#475569]">Característica declarada</span>
+        </div>
+
+        <div class="sands-card p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-[#002E67]">Descargar o eliminar</h3>
+            <p class="mt-2 text-sm text-[#475569]">Tus palabras te pertenecen. Cuentas con herramientas para descargar tus notas o borrarlas definitivamente.</p>
+          </div>
+          <span class="mt-4 pt-3 border-t border-[#002E67]/10 text-xs font-bold text-[#EF8E11]">Control del usuario</span>
+        </div>
+
+      </div>
+
+      <div class="mt-8 p-6 rounded-2xl bg-[#F8FAFC] border border-[#002E67]/15 flex items-start gap-4">
+        <div class="w-8 h-8 rounded-lg bg-[#002E67] text-white flex items-center justify-center shrink-0 font-bold">ℹ</div>
+        <div>
+          <h4 class="text-base font-bold text-[#002E67]">Claridad y honestidad sobre la seguridad</h4>
+          <p class="mt-1 text-sm text-[#475569] leading-relaxed">
+            El cifrado y las opciones de descarga o eliminación son características técnicas declaradas e implementadas por la plataforma. No prometemos confidencialidad absoluta en entornos digitales ni presentamos nuestra seguridad como auditada por entidades externas. Te invitamos a compartir únicamente aquello con lo que te sientas plenamente cómoda.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. PAUSA DE CALMA (Azul Marino y Turquesa Sands · Respiración Guiada Interactiva) -->
+  <section id="pausa" class="py-12 md:py-20 bg-[#002E67] text-white text-center">
+    <div class="max-w-2xl mx-auto px-5 sm:px-8 flex flex-col items-center">
+      
+      <span class="inline-block px-3.5 py-1.5 rounded-lg bg-[#1A95BA]/25 border border-[#1A95BA]/40 text-[#1A95BA] text-xs font-bold tracking-wider uppercase mb-4">
+        Respiro consciente
+      </span>
+
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+        Tómate un momento para respirar
+      </h2>
+
+      <p class="mt-3 text-[16px] sm:text-[17px] text-white/90 leading-relaxed max-w-lg">
+        No tienes que resolverlo todo hoy. Baja los hombros, suelta el peso y acompaña tu cuerpo durante unos segundos.
+      </p>
+
+      <!-- Círculo de respiración interactivo -->
+      <div class="my-10 relative flex items-center justify-center w-56 h-56">
+        <div id="breath-halo" class="absolute inset-0 rounded-full bg-[#1A95BA]/25 border border-[#1A95BA]/40 animate-sands-breath"></div>
+        <div class="relative z-10 w-40 h-40 rounded-full bg-white text-[#002E67] shadow-xl flex flex-col items-center justify-center p-4 text-center border-2 border-[#1A95BA]">
+          <span id="breath-label" class="text-xs uppercase tracking-widest font-extrabold text-[#1A95BA]">Calma</span>
+          <span id="breath-counter" class="text-4xl font-extrabold text-[#002E67] mt-1">4:4</span>
+          <span class="text-xs font-semibold text-[#475569] mt-0.5">respira</span>
+        </div>
+      </div>
+
+      <div class="min-h-[40px] flex items-center justify-center mb-6">
+        <p id="breath-instruction" class="text-base font-semibold text-white/95">
+          Presiona el botón para iniciar el ejercicio guiado.
+        </p>
+      </div>
+
+      <button id="breath-btn" type="button" onclick="toggleBreathing()" class="px-8 py-3.5 rounded-xl bg-[#EF8E11] hover:bg-[#D87B00] text-[#001E44] font-bold text-base shadow-sm transition-all cursor-pointer">
+        Tomar una pausa
+      </button>
+
+    </div>
+  </section>
+
+  <!-- 9. CTA FINAL (Banner Azul Marino de Sands con Botón Ámbar) -->
+  <section class="py-14 md:py-20 bg-[#F8FAFC]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="rounded-3xl bg-[#002E67] text-white p-8 sm:p-14 text-center shadow-xl border border-[#1A95BA]/30 max-w-4xl mx-auto">
+        <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-[#EF8E11] mx-auto mb-6 font-bold text-2xl">
+          ☀
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Cuando lo necesites, aquí estamos <span class="text-[#1A95BA]">a tu lado</span>
+        </h2>
+        <p class="mt-4 text-[16px] sm:text-[18px] text-white/90 leading-relaxed max-w-xl mx-auto">
+          Sin formularios largos, sin costo y sin exigencias sobre tu recuperación. Puedes entrar ahora mismo o regresar cuando lo desees.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button type="button" onclick="openModal('modal-ingreso')" class="w-full sm:w-auto px-8 py-4 text-base font-bold text-[#001E44] bg-[#EF8E11] hover:bg-[#D87B00] rounded-xl shadow-md transition-all cursor-pointer">
+            Entrar a la app
+          </button>
+          <a href="#biblioteca" class="w-full sm:w-auto px-7 py-4 text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl transition-all">
+            Explorar la biblioteca
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FOOTER COMPLETO · AVISO MÉDICO DESTACADO Y LÍNEAS DE CRISIS PERÚ -->
+  <footer class="bg-[#001E44] text-white pt-14 pb-12 border-t-4 border-[#EF8E11]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <!-- AVISO MÉDICO DESTACADO Y VISIBLE (NO letra chica) -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-[#002E67] border-2 border-[#1A95BA] shadow-md mb-12">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-[#EF8E11] text-[#001E44] flex items-center justify-center shrink-0 font-bold text-xl">
+              !
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Aviso importante sobre el acompañamiento</h3>
+              <p class="mt-1 text-sm sm:text-base text-white/90 font-medium leading-relaxed">
+                A Tu Lado Hoy complementa el apoyo profesional y no sustituye la atención médica, psicológica ni los servicios de emergencia. Si estás en riesgo o en una emergencia, busca ayuda inmediata.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <button type="button" onclick="openModal('modal-recursos')" class="px-6 py-3 rounded-xl bg-[#EF8E11] hover:bg-[#D87B00] text-[#001E44] font-bold text-sm shadow-xs transition-colors cursor-pointer whitespace-nowrap">
+              Recursos de ayuda
+            </button>
+            <button type="button" onclick="quickExit()" class="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 transition-colors cursor-pointer">
+              Salida rápida
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/15 text-left">
+        <div class="md:col-span-5">
+          <span class="font-extrabold text-2xl tracking-tight text-white block">A Tu Lado Hoy</span>
+          <p class="mt-3 text-sm text-white/80 leading-relaxed max-w-sm">
+            Plataforma gratuita de acompañamiento emocional perinatal para mujeres en Perú. Inspirada en los principios de escucha compasiva, accesibilidad y no revictimización de Sands UK.
+          </p>
+          <p class="mt-4 text-xs text-white/60">atuladohoy.com · Espacio de apoyo respetuoso</p>
+        </div>
+
+        <div class="md:col-span-3">
+          <h4 class="text-xs font-bold tracking-wider text-[#1A95BA] uppercase mb-4">Navegación</h4>
+          <ul class="space-y-2 text-sm text-white/85">
+            <li><a href="#inicio" class="hover:text-[#1A95BA]">Inicio</a></li>
+            <li><a href="#etapas" class="hover:text-[#1A95BA]">Por etapa</a></li>
+            <li><a href="#herramientas" class="hover:text-[#1A95BA]">Herramientas de apoyo</a></li>
+            <li><a href="#biblioteca" class="hover:text-[#1A95BA]">Biblioteca perinatal</a></li>
+            <li><a href="#derechos" class="hover:text-[#1A95BA]">Ley N.º 32132</a></li>
+            <li><a href="#pausa" class="hover:text-[#1A95BA]">Pausa de calma</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <h4 class="text-xs font-bold tracking-wider text-[#1A95BA] uppercase mb-4">Líneas en Perú</h4>
+          <ul class="space-y-2 text-sm text-white/85">
+            <li><button onclick="openModal('modal-recursos')" class="text-[#EF8E11] font-bold hover:underline">Línea 113 MINSA (Opción 5)</button></li>
+            <li><button onclick="openModal('modal-recursos')" class="hover:text-[#1A95BA]">Línea 100 (MIMP)</button></li>
+            <li><a href="#privacidad" class="hover:text-[#1A95BA]">Acceso sin registro y sin nombre real</a></li>
+            <li><button onclick="openModal('modal-ley')" class="hover:text-[#1A95BA]">Información sobre Ley N.º 32132</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
+        <div>© 2026 A Tu Lado Hoy. Todos los derechos reservados.</div>
+        <div>Diseño accesible con contraste adaptado para mujeres en el Perú.</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MODAL: INGRESO LIBRE / ANÓNIMO -->
+  <div id="modal-ingreso" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-[#001E44]/75 backdrop-blur-xs">
+    <div class="w-full max-w-lg bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#002E67]/20 shadow-2xl relative text-left">
+      <button onclick="closeModal('modal-ingreso')" class="absolute top-5 right-5 p-2 text-[#002E67]/70 hover:text-[#002E67]">✕</button>
+      <h3 class="text-2xl font-extrabold text-[#002E67]">Entrar a A Tu Lado Hoy</h3>
+      <p class="text-sm text-[#475569] mt-2 mb-6">Elige cómo prefieres entrar a tu espacio hoy:</p>
+      <div class="space-y-3 mb-6">
+        <label class="p-4 rounded-xl border-2 border-[#1A95BA] bg-[#F4F9FA] flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="ingreso" checked class="mt-1">
+          <div>
+            <h4 class="font-bold text-[#002E67]">Entrar de forma anónima</h4>
+            <p class="text-xs text-[#475569]">Sin nombre ni correo. Las herramientas se activan de inmediato en este dispositivo.</p>
+          </div>
+        </label>
+        <label class="p-4 rounded-xl border-2 border-[#002E67]/15 bg-white flex items-start gap-3 cursor-pointer">
+          <input type="radio" name="ingreso" class="mt-1">
+          <div>
+            <h4 class="font-bold text-[#002E67]">Usar un seudónimo protector</h4>
+            <p class="text-xs text-[#475569]">Elige un alias con el que te sientas en paz (ej. Esperanza, Mar, Luna).</p>
+          </div>
+        </label>
+      </div>
+      <div class="flex justify-end gap-3">
+        <button onclick="closeModal('modal-ingreso')" class="px-5 py-2.5 text-sm font-bold text-[#475569]">Cancelar</button>
+        <button onclick="alert('Ingresando al espacio en modo libre...'); closeModal('modal-ingreso');" class="px-7 py-3 rounded-xl bg-[#EF8E11] text-[#001E44] font-bold text-sm">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RECURSOS DE AYUDA PERÚ -->
+  <div id="modal-recursos" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-[#001E44]/75 backdrop-blur-xs">
+    <div class="w-full max-w-xl bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#002E67]/20 shadow-2xl relative text-left max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('modal-recursos')" class="absolute top-5 right-5 p-2 text-[#002E67]/70 hover:text-[#002E67]">✕</button>
+      <h3 class="text-2xl font-extrabold text-[#002E67] mb-2">Líneas de ayuda en Perú</h3>
+      <div class="p-3 bg-[#FFF9F2] border-2 border-[#EF8E11] rounded-xl text-xs text-[#001E44] font-semibold mb-4">
+        Si te encuentras en una emergencia física o desborde emocional severo, comunícate inmediatamente con los servicios del Estado peruano.
+      </div>
+      <div class="space-y-3 mb-6">
+        <div class="p-4 rounded-xl bg-[#F8FAFC] border-2 border-[#1A95BA] flex justify-between items-center">
+          <div>
+            <span class="text-xs font-bold text-[#1A95BA]">MINSA · Gratuito 24h</span>
+            <div class="text-xl font-extrabold text-[#002E67]">Línea 113 (Opción 5)</div>
+            <p class="text-xs text-[#475569]">Orientación psicológica a nivel nacional.</p>
+          </div>
+          <a href="tel:113" class="px-4 py-2 bg-[#002E67] text-white rounded-lg text-xs font-bold">Llamar</a>
+        </div>
+        <div class="p-4 rounded-xl bg-[#F8FAFC] border-2 border-[#EF8E11] flex justify-between items-center">
+          <div>
+            <span class="text-xs font-bold text-[#EF8E11]">MIMP · Gratuito 24h</span>
+            <div class="text-xl font-extrabold text-[#002E67]">Línea 100</div>
+            <p class="text-xs text-[#475569]">Soporte y contención para mujeres.</p>
+          </div>
+          <a href="tel:100" class="px-4 py-2 bg-[#EF8E11] text-[#001E44] rounded-lg text-xs font-bold">Llamar</a>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button onclick="closeModal('modal-recursos')" class="px-6 py-2.5 bg-[#002E67] text-white rounded-xl text-sm font-bold">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: INFORMACIÓN LEY N.º 32132 -->
+  <div id="modal-ley" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-[#001E44]/75 backdrop-blur-xs">
+    <div class="w-full max-w-lg bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#002E67]/20 shadow-2xl relative text-left">
+      <button onclick="closeModal('modal-ley')" class="absolute top-5 right-5 p-2 text-[#002E67]/70 hover:text-[#002E67]">✕</button>
+      <h3 class="text-2xl font-extrabold text-[#002E67] mb-2">Sección informativa: Ley N.º 32132</h3>
+      <p class="text-sm text-[#475569] leading-relaxed mb-4">
+        Esta sección tiene como propósito informar sobre la promulgación de la <strong>Ley N.º 32132</strong> en el ordenamiento jurídico peruano.
+      </p>
+      <div class="p-4 rounded-xl bg-[#E1F2F6] border-2 border-[#1A95BA]/40 text-xs text-[#002E67] leading-relaxed mb-6">
+        A Tu Lado Hoy no realiza interpretaciones de los alcances legales de la Ley N.º 32132 ni brinda asesoría jurídica particular. Ponemos a disposición las referencias oficiales publicadas en el Diario Oficial <em>El Peruano</em>.
+      </div>
+      <div class="flex justify-between items-center">
+        <a href="https://busquedas.elperuano.pe/normaslegales/" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#1A95BA] underline">Buscar en El Peruano ↗</a>
+        <button onclick="closeModal('modal-ley')" class="px-6 py-2.5 bg-[#002E67] text-white rounded-xl text-sm font-bold">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE INTERACTIVIDAD (Salida Rápida, Modales, Respiración Guiada) -->
+  <script>
+    // 1. Salida Rápida Sands UK
+    function quickExit() {
+      window.location.replace('https://www.google.com');
+    }
+
+    // 2. Modales
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+    }
+
+    // 3. Respiración Guiada Interactiva (Ritmo 4-4-4-4)
+    let isBreathing = false;
+    let breathInterval = null;
+    let breathPhase = 'inhala';
+    let breathCount = 4;
+
+    function toggleBreathing() {
+      const btn = document.getElementById('breath-btn');
+      const label = document.getElementById('breath-label');
+      const counter = document.getElementById('breath-counter');
+      const instruction = document.getElementById('breath-instruction');
+      const halo = document.getElementById('breath-halo');
+
+      isBreathing = !isBreathing;
+
+      if (isBreathing) {
+        btn.textContent = 'Pausar respiración';
+        breathPhase = 'inhala';
+        breathCount = 4;
+        updateBreathDisplay();
+
+        breathInterval = setInterval(() => {
+          breathCount--;
+          if (breathCount <= 0) {
+            if (breathPhase === 'inhala') { breathPhase = 'sostén'; }
+            else if (breathPhase === 'sostén') { breathPhase = 'exhala'; }
+            else if (breathPhase === 'exhala') { breathPhase = 'pausa'; }
+            else { breathPhase = 'inhala'; }
+            breathCount = 4;
+          }
+          updateBreathDisplay();
+        }, 1000);
+      } else {
+        clearInterval(breathInterval);
+        btn.textContent = 'Tomar una pausa';
+        label.textContent = 'Calma';
+        counter.textContent = '4:4';
+        instruction.textContent = 'Presiona el botón para iniciar el ejercicio guiado.';
+      }
+    }
+
+    function updateBreathDisplay() {
+      const label = document.getElementById('breath-label');
+      const counter = document.getElementById('breath-counter');
+      const instruction = document.getElementById('breath-instruction');
+      
+      label.textContent = breathPhase.toUpperCase();
+      counter.textContent = breathCount;
+
+      if (breathPhase === 'inhala') {
+        instruction.textContent = 'Inhala despacio por la nariz... siente el aire llenar tu pecho';
+      } else if (breathPhase === 'sostén') {
+        instruction.textContent = 'Sostén con gentileza... permanece en quietud sin tensionar';
+      } else if (breathPhase === 'exhala') {
+        instruction.textContent = 'Exhala suavemente por la boca... suelta el peso acumulado';
+      } else {
+        instruction.textContent = 'Reposa un instante... tu cuerpo encuentra su propio ritmo';
+      }
+    }
+  </script>
+
+</body>
+</html>
